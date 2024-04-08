@@ -1,0 +1,42 @@
+### Send POST request with json body
+POST {{orion}}/v2/entities
+Content-Type: application/json
+
+{
+  "id": "jbsl_buoy_vicario_01",
+  "type": "CalidadAgua",
+  "location": {
+    "value": {
+      "type": "Point",
+      "coordinates": [
+        28.68067302552239,
+        -17.952855018757607
+      ]
+    },
+    "type": "geo:json"
+  },
+  "temperature": {
+    "type": "Number",
+    "value": "22.5"
+  },
+  "ph": {
+    "type": "Number",
+    "value": "6.9"
+  },
+  "turbidity": {
+    "type": "Number",
+    "value": "0.7"
+  },
+  "conductivity": {
+    "type": "Number",
+    "value": "0.2"
+  },
+  "level": {
+    "type": "Number",
+    "value": "4.2"
+  },
+  "chlorine": {
+    "type": "Number",
+    "value": "0.3"
+  }
+}

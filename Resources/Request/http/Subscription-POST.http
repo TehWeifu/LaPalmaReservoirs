@@ -1,0 +1,45 @@
+### Send POST request with json body
+POST {{orion}}/v2/subscriptions
+Content-Type: application/json
+
+{
+  "description": "Suscripcion QuantumLeap a calidad del agua",
+  "subject": {
+    "entities": [
+      {
+        "idPattern": ".*",
+        "type": "CalidadAgua"
+      }
+    ],
+    "condition": {
+      "attrs": [
+        "chlorine",
+        "conductivity",
+        "level",
+        "ph",
+        "turbidity",
+        "temperature"
+      ]
+    }
+  },
+  "notification": {
+    "attrs": [
+      "id",
+      "type",
+      "chlorine",
+      "conductivity",
+      "level",
+      "ph",
+      "turbidity",
+      "temperature",
+      "location"
+    ],
+    "http": {
+      "url": "{{quantumleap}}/v2/notify"
+    },
+    "metadata": [
+      "dateCreated",
+      "dateModified"
+    ]
+  }
+}

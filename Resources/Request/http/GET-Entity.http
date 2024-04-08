@@ -1,0 +1,6 @@
+### Send GET to fetch all entities
+GET {{orion}}/v2/entities
+
+
+### Send GET to fetch all entities
+GET {{orion}}/v2/entities/jbsl_buoy_vicario_01

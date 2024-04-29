@@ -34,10 +34,6 @@ payload = {
         },
         "type": "geo:json"
     },
-    "source": {
-        "type": "Text",
-        "value": "http://www.aire.cdmx.gob.mx/"
-    },
     "temperature": {
         "type": "Number",
         "value": "0"

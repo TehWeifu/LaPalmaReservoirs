@@ -65,12 +65,13 @@ def create_quantum_leap_subscription_payload() -> dict:
             ],
             "condition": {
                 "attrs": [
-                    "chlorine",
-                    "conductivity",
-                    "level",
+                    "dateObserved",
+                    "temperature",
                     "ph",
                     "turbidity",
-                    "temperature"
+                    "conductivity",
+                    "level",
+                    "chlorine",
                 ]
             }
         },
@@ -78,13 +79,14 @@ def create_quantum_leap_subscription_payload() -> dict:
             "attrs": [
                 "id",
                 "type",
-                "chlorine",
-                "conductivity",
-                "level",
+                "location",
+                "dateObserved",
+                "temperature",
                 "ph",
                 "turbidity",
-                "temperature",
-                "location"
+                "conductivity",
+                "level",
+                "chlorine"
             ],
             "http": {
                 "url": f"{os.getenv("HOST_QUANTUMLEAP")}/v2/notify"

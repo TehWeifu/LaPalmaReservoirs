@@ -24,10 +24,10 @@ headers = {
 
 
 def initialize_logger(name: str) -> Logger:
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
     logger = Logger(name)
     console_handler = logging.StreamHandler(sys.stdout)
-    console_handler.setLevel(logging.DEBUG)
+    console_handler.setLevel(logging.INFO)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     console_handler.setFormatter(formatter)
     logger.addHandler(console_handler)
@@ -86,7 +86,7 @@ while DATE_ITERATOR < DATE_END:
         url_entity_attrs = f"{url}/{entity['id']}/attrs"
         response = requests.patch(url_entity_attrs, headers=headers, json=payload)
 
-        logger.debug(
+        logger.info(
             f"Entity: {entity['id']} - Property: {random_key_chosen} - Value: {random_value} - Date: {DATE_ITERATOR} - Response: {response.status_code}"
         )
 

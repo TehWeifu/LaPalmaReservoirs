@@ -31,7 +31,7 @@ ENTITY_PROPERTIES = {
 
 # Start and End Dates for Message Generation
 DATE_START = datetime(2024, 4, 1)
-DATE_END = datetime(2024, 4, 2)
+DATE_END = datetime(2024, 4, 8)
 
 # Periodicity of messages (in seconds)
 MESSAGE_PERIOD = 3_600

@@ -85,7 +85,8 @@ while DATE_ITERATOR < DATE_END:
         }
 
         # Send the POST request
-        response = requests.patch(url, headers=headers, json=payload)
+        url_entity_attrs = f"{url}/{entity['id']}/attrs"
+        response = requests.patch(url_entity_attrs, headers=headers, json=payload)
 
         logger.debug(
             f"Entity: {entity['id']} - Property: {random_key_chosen} - Value: {random_value} - Date: {DATE_ITERATOR} - Response: {response.status_code}"

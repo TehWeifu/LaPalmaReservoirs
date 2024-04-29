@@ -64,7 +64,7 @@ DATE_ITERATOR = DATE_START
 while DATE_ITERATOR < DATE_END:
 
     for entity in entities:
-        # Payload
+        # Payload to patch the entity
         payload = {
             "id": entity["id"],
             "type": entity["type"],
@@ -84,7 +84,7 @@ while DATE_ITERATOR < DATE_END:
             "value": random_value
         }
 
-        # Send the POST request
+        # Send the PATCH request
         url_entity_attrs = f"{url}/{entity['id']}/attrs"
         response = requests.patch(url_entity_attrs, headers=headers, json=payload)
 

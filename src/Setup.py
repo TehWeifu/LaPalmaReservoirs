@@ -2,6 +2,7 @@
 
 import json
 import os
+from datetime import datetime
 
 import requests
 from dotenv import load_dotenv
@@ -14,6 +15,10 @@ def create_default_entity_payload(name: str, latitude: float, longitude: float) 
     return {
         "id": name,
         "type": "CalidadAgua",
+        "dateObserved": {
+            "type": "DateTime",
+            "value": datetime.now().isoformat()
+        },
         "location": {
             "value": {
                 "type": "Point",

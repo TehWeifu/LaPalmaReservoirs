@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import json
+import os
 
 import requests
 from dotenv import load_dotenv
@@ -9,66 +10,91 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-def create_default_entity_payload(name: str) -> dict:
+def create_default_entity_payload(name: str, latitude: float, longitude: float) -> dict:
     return {
         "id": name,
-        "type": "AirQualityObserved",
-        "dateObserved": {
-            "type": "DateTime",
-            "value": "2018-07-30T18:00:00-05:00"
-        },
-        "address": {
-            "type": "StructuredValue",
-            "value": {
-                "addressCountry": "MX",
-                "addressLocality": "Ciudad de Mexico",
-                "streetAddress": "Centro"
-            }
-        },
+        "type": "CalidadAgua",
         "location": {
             "value": {
                 "type": "Point",
-                "coordinates": [28.68067302552239, -17.952855018757607]
+                "coordinates": [latitude, longitude]
             },
             "type": "geo:json"
         },
-        "source": {
-            "type": "Text",
-            "value": "http://www.aire.cdmx.gob.mx/"
-        },
         "temperature": {
             "type": "Number",
-            "value": "0"
+            "value": "22.5"
         },
-        "relativeHumidity": {
+        "ph": {
             "type": "Number",
-            "value": "0"
+            "value": "6.9"
         },
-        "CO": {
+        "turbidity": {
             "type": "Number",
-            "value": "0"
+            "value": "0.7"
         },
-        "O3": {
+        "conductivity": {
             "type": "Number",
-            "value": "0"
+            "value": "0.2"
         },
-        "NO2": {
+        "level": {
             "type": "Number",
-            "value": "0"
+            "value": "4.2"
         },
-        "SO2": {
+        "chlorine": {
             "type": "Number",
-            "value": "0"
+            "value": "0.3"
+        }
+    }
+
+
+def create_quantum_leap_subscription_payload() -> dict:
+    return {
+        "description": "QuantumLeap subscription to 'CalidadAgua' entities",
+        "subject": {
+            "entities": [
+                {
+                    "idPattern": ".*",
+                    "type": "CalidadAgua"
+                }
+            ],
+            "condition": {
+                "attrs": [
+                    "chlorine",
+                    "conductivity",
+                    "level",
+                    "ph",
+                    "turbidity",
+                    "temperature"
+                ]
+            }
         },
-        "PM10": {
-            "type": "Number",
-            "value": "0"
+        "notification": {
+            "attrs": [
+                "id",
+                "type",
+                "chlorine",
+                "conductivity",
+                "level",
+                "ph",
+                "turbidity",
+                "temperature",
+                "location"
+            ],
+            "http": {
+                "url": "{{quantumleap}}/v2/notify"
+            },
+            "metadata": [
+                "dateCreated",
+                "dateModified"
+            ]
         }
     }
 
 
 # Server URL
-url = "http://localhost:1026/v2/entities"
+url_entity = f"{os.getenv("HOST_ORION")}/v2/entities"
+url_subscription = f"{os.getenv("HOST_ORION")}/v2/subscriptions"
 
 # Request headers
 headers = {
@@ -76,9 +102,18 @@ headers = {
 }
 
 # Create first entity
-first_entity_payload = json.dumps(create_default_entity_payload("JulianSanchez_01"))
-first_entity_response = requests.post(url, headers=headers, data=first_entity_payload)
+first_entity_payload = json.dumps(
+    create_default_entity_payload("JulianSanchez_01", 28.68067302552239, -17.952855018757607)
+)
+first_entity_response = requests.post(url_entity, headers=headers, data=first_entity_payload)
 
 # Create second entity
-second_entity_payload = json.dumps(create_default_entity_payload("JulianSanchez_01"))
-second_entity_response = requests.post(url, headers=headers, data=second_entity_payload)
+second_entity_payload = json.dumps(
+    create_default_entity_payload("JulianSanchez_02", 28.68067302552239, -17.952855018757607)
+)
+second_entity_response = requests.post(url_entity, headers=headers, data=second_entity_payload)
+
+# Create QuantumLeap subscription
+quantum_leap_subscription_payload = json.dumps(create_quantum_leap_subscription_payload())
+quantum_leap_subscription_response = requests.post(url_subscription, headers=headers,
+                                                   data=quantum_leap_subscription_payload)

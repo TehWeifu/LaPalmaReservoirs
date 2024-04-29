@@ -66,8 +66,6 @@ while DATE_ITERATOR < DATE_END:
     for entity in entities:
         # Payload to patch the entity
         payload = {
-            "id": entity["id"],
-            "type": entity["type"],
             "dateObserved": {
                 "type": "DateTime",
                 "value": DATE_ITERATOR.isoformat()

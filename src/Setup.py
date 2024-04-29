@@ -109,7 +109,7 @@ first_entity_response = requests.post(url_entity, headers=headers, data=first_en
 
 # Create second entity
 second_entity_payload = json.dumps(
-    create_default_entity_payload("JulianSanchez_02", 28.68067302552239, -17.952855018757607)
+    create_default_entity_payload("JulianSanchez_02", 28.805544, -17.780556)
 )
 second_entity_response = requests.post(url_entity, headers=headers, data=second_entity_payload)
 

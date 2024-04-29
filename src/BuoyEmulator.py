@@ -8,8 +8,11 @@ from datetime import timedelta
 from logging import Logger
 
 import requests
+from dotenv import load_dotenv
 
 from src.cfg.config import *
+
+load_dotenv()
 
 # URL of the service
 url = f"{os.getenv("HOST_ORION")}/v2/entities"
@@ -34,7 +37,8 @@ def initialize_logger(name: str) -> Logger:
 def fetch_entities(entity_names: list) -> list:
     entities_fetched = []
     for entity_name in entity_names:
-        response = requests.get(f"{url}/{entity_name}", headers=headers)
+        my_url = f"{url}/{entity_name}"
+        response = requests.get(my_url)
         entities_fetched.append(response.json())
     return entities_fetched
 
@@ -53,6 +57,7 @@ def calculate_property_random_value(entity: dict, key: str) -> dict:
 
 
 logger = initialize_logger("buoy_emulator")
+
 entities = fetch_entities(ENTITIES_IDS)
 
 DATE_ITERATOR = DATE_START
@@ -80,7 +85,7 @@ while DATE_ITERATOR < DATE_END:
         }
 
         # Send the POST request
-        response = requests.post(url, headers=headers, json=payload)
+        response = requests.patch(url, headers=headers, json=payload)
 
         logger.debug(
             f"Entity: {entity['id']} - Property: {random_key_chosen} - Value: {random_value} - Date: {DATE_ITERATOR} - Response: {response.status_code}"

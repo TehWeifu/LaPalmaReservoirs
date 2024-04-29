@@ -28,34 +28,34 @@ def create_default_entity_payload(name: str, latitude: float, longitude: float) 
         },
         "temperature": {
             "type": "Number",
-            "value": "22.5"
+            "value": 22.5
         },
         "ph": {
             "type": "Number",
-            "value": "6.9"
+            "value": 7.1
         },
         "turbidity": {
             "type": "Number",
-            "value": "0.7"
+            "value": 80
         },
         "conductivity": {
             "type": "Number",
-            "value": "0.2"
+            "value": 600
         },
         "level": {
             "type": "Number",
-            "value": "4.2"
+            "value": 4.2
         },
         "chlorine": {
             "type": "Number",
-            "value": "0.3"
+            "value": 0.3
         }
     }
 
 
 def create_quantum_leap_subscription_payload() -> dict:
     return {
-        "description": "QuantumLeap subscription to 'CalidadAgua' entities",
+        "description": "QuantumLeap subscription to CalidadAgua entities",
         "subject": {
             "entities": [
                 {
@@ -87,7 +87,7 @@ def create_quantum_leap_subscription_payload() -> dict:
                 "location"
             ],
             "http": {
-                "url": "{{quantumleap}}/v2/notify"
+                "url": f"{os.getenv("HOST_QUANTUMLEAP")}/v2/notify"
             },
             "metadata": [
                 "dateCreated",

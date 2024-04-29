@@ -34,4 +34,4 @@ DATE_START = datetime(2024, 4, 1)
 DATE_END = datetime(2024, 4, 2)
 
 # Periodicity of messages (in seconds)
-MESSAGE_PERIOD = 10
+MESSAGE_PERIOD = 3_600

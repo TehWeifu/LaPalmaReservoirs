@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "id": "jbsl_buoy_vicario_01",
-  "type": "CalidadAgua",
+  "type": "WaterQuality",
   "location": {
     "value": {
       "type": "Point",

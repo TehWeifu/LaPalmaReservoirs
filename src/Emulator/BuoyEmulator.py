@@ -10,7 +10,7 @@ from logging import Logger
 import requests
 from dotenv import load_dotenv
 
-from src.cfg.config import *
+from Emulator.cfg.config import *
 
 load_dotenv()
 

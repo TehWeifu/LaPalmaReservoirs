@@ -14,7 +14,7 @@ load_dotenv()
 def create_default_entity_payload(name: str, latitude: float, longitude: float) -> dict:
     return {
         "id": name,
-        "type": "CalidadAgua",
+        "type": "WaterQuality",
         "dateObserved": {
             "type": "DateTime",
             "value": datetime.now().isoformat()
@@ -55,12 +55,12 @@ def create_default_entity_payload(name: str, latitude: float, longitude: float) 
 
 def create_quantum_leap_subscription_payload() -> dict:
     return {
-        "description": "QuantumLeap subscription to CalidadAgua entities",
+        "description": "QuantumLeap subscription to WaterQuality entities",
         "subject": {
             "entities": [
                 {
                     "idPattern": ".*",
-                    "type": "CalidadAgua"
+                    "type": "WaterQuality"
                 }
             ],
             "condition": {

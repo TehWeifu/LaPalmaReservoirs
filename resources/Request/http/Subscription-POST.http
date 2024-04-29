@@ -8,7 +8,7 @@ Content-Type: application/json
     "entities": [
       {
         "idPattern": ".*",
-        "type": "CalidadAgua"
+        "type": "WaterQuality"
       }
     ],
     "condition": {

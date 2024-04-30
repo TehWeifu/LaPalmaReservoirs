@@ -23,3 +23,5 @@ Stop architecture: `docker-compose -f docker-compose_SDD.yml down`
 - Remote (server):
     - Orion: `http://orion.lapalma.fpmislata.es`
     - QuantumLeap: `http://orion.lapalma.fpmislata.es:8668`
+    - Grafana: `http://orion.lapalma.fpmislata.es:3000`
+    - Crate: `http://orion.lapalma.fpmislata.es:4200/#!/`

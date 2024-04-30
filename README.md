@@ -25,3 +25,9 @@ Stop architecture: `docker-compose -f docker-compose_SDD.yml down`
     - QuantumLeap: `http://orion.lapalma.fpmislata.es:8668`
     - Grafana: `http://orion.lapalma.fpmislata.es:3000`
     - Crate: `http://orion.lapalma.fpmislata.es:4200/#!/`
+
+# Grafana
+
+Steps to add CrateDB as Grafana data source:
+
+1. Host: crate:5433

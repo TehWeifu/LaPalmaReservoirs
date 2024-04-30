@@ -18,10 +18,10 @@ Stop architecture: `docker-compose -f docker-compose_SDD.yml down`
 # Endpoints
 
 - Local (VM):
-    - Orion: `http://192.168.56.102:1026`
-    - QuantumLeap: `http://192.168.56.102:8668`
-    - Grafana: `http://192.168.56.102:3000`
-    - Crate: `http://192.168.56.102:4200/#!/`
+    - Orion: `http://192.168.56.104:1026`
+    - QuantumLeap: `http://192.168.56.104:8668`
+    - Grafana: `http://192.168.56.104:3000`
+    - Crate: `http://192.168.56.104:4200/#!/`
 - Remote (server):
     - Orion: `http://orion.lapalma.fpmislata.es`
     - QuantumLeap: `http://orion.lapalma.fpmislata.es:8668`

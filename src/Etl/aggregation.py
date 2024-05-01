@@ -25,3 +25,4 @@ def fetch_data():
 
 data_fetched = fetch_data()
 df_buoy = pd.DataFrame(data_fetched)
+print(df_buoy.head())

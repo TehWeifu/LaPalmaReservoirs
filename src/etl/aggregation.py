@@ -8,14 +8,12 @@ load_dotenv()
 
 
 def fetch_data():
-    # Connect to CrateDB
     connection = client.connect(os.getenv("HOST_CRATE"), username="crate", password=None, timeout=10)
     cursor = connection.cursor()
 
     query = ("SELECT "
              "entity_id, dateobserved, temperature, ph, turbidity, conductivity, level, chlorine "
-             "FROM etwaterquality "
-             "LIMIT 10")
+             "FROM etwaterquality")
 
     try:
         cursor.execute(query)
@@ -29,6 +27,7 @@ def fetch_data():
         connection.close()
 
 
+# Fetch data from CrateDB
 data_fetched = fetch_data()
 df_buoy = pd.DataFrame(
     data_fetched,
@@ -55,9 +54,6 @@ df_buoy = df_buoy.groupby(["entity", "date_observed", "property"]).agg(
     min_value=("value", "min"),
     max_value=("value", "max")
 ).reset_index()
-
-# Print the DataFrame with all columns
-print(df_buoy)
 
 # Save the DataFrame to a CSV file
 df_buoy.to_csv("./../../data/etwaterquality.csv", index=False)

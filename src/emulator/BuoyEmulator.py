@@ -10,7 +10,7 @@ from logging import Logger
 import requests
 from dotenv import load_dotenv
 
-from Emulator.cfg.config import *
+from emulator.cfg.config import *
 
 load_dotenv()
 
@@ -46,7 +46,7 @@ def fetch_entities(entity_names: list) -> list:
 def calculate_property_random_value(entity: dict, key: str) -> dict:
     current_value = float(entity[key]["value"])  # Get the current value of the property
 
-    value_range = ENTITY_PROPERTIES[random_key_chosen]["value_range"]  # Get the range of the property
+    value_range = ENTITY_PROPERTIES[key_to_patch]["value_range"]  # Get the range of the property
 
     delta = random.uniform(value_range[0], value_range[1]) * random.uniform(-.1, .1)  # Modify the value by +-10%
 
@@ -72,22 +72,21 @@ while DATE_ITERATOR < DATE_END:
             }
         }
 
-        # Pick a random property to be updated
-        random_key_chosen = random.choice(list(ENTITY_PROPERTIES.keys()))
-
-        # Calculate the new value for the property
-        random_value = calculate_property_random_value(entity, random_key_chosen)
-        payload[random_key_chosen] = {
-            "type": ENTITY_PROPERTIES[random_key_chosen]["type"],
-            "value": random_value
-        }
+        # Loop through the properties of the entity
+        for key_to_patch in ENTITY_PROPERTIES.keys():
+            # Calculate the new value for the property
+            random_value = calculate_property_random_value(entity, key_to_patch)
+            payload[key_to_patch] = {
+                "type": ENTITY_PROPERTIES[key_to_patch]["type"],
+                "value": random_value
+            }
 
         # Send the PATCH request
         url_entity_attrs = f"{url}/{entity['id']}/attrs"
         response = requests.patch(url_entity_attrs, headers=headers, json=payload)
 
         logger.info(
-            f"Entity: {entity['id']} - Property: {random_key_chosen} - Value: {random_value} - Date: {DATE_ITERATOR} - Response: {response.status_code}"
+            f"Entity: {entity['id']} - Date: {DATE_ITERATOR} - Response: {response.status_code}"
         )
 
     DATE_ITERATOR += timedelta(seconds=MESSAGE_PERIOD)

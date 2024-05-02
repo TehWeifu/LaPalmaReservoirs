@@ -15,22 +15,177 @@
       }
     ]
   },
-  "description": "",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 1,
   "links": [],
   "panels": [
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "fdkdeqviduiv4a"
+        "uid": "bdki4has3hptse"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "thresholds"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 2
+              }
+            ]
+          },
+          "unit": "lengthm"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 18,
+        "w": 7,
+        "x": 0,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "basemap": {
+          "config": {},
+          "name": "Layer 0",
+          "type": "default"
+        },
+        "controls": {
+          "mouseWheelZoom": true,
+          "showAttribution": true,
+          "showDebug": false,
+          "showMeasure": false,
+          "showScale": false,
+          "showZoom": true
+        },
+        "layers": [
+          {
+            "config": {
+              "showLegend": true,
+              "style": {
+                "color": {
+                  "fixed": "dark-green"
+                },
+                "opacity": 0.4,
+                "rotation": {
+                  "fixed": 0,
+                  "max": 360,
+                  "min": -360,
+                  "mode": "mod"
+                },
+                "size": {
+                  "fixed": 5,
+                  "max": 15,
+                  "min": 2
+                },
+                "symbol": {
+                  "fixed": "img/icons/marker/circle.svg",
+                  "mode": "fixed"
+                },
+                "symbolAlign": {
+                  "horizontal": "center",
+                  "vertical": "center"
+                },
+                "text": {
+                  "field": "level",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "textConfig": {
+                  "fontSize": 22,
+                  "offsetY": 10,
+                  "textAlign": "center",
+                  "textBaseline": "top"
+                }
+              }
+            },
+            "filterData": {
+              "id": "byRefId",
+              "options": "A"
+            },
+            "location": {
+              "mode": "auto"
+            },
+            "name": "Sensor",
+            "tooltip": true,
+            "type": "markers"
+          }
+        ],
+        "tooltip": {
+          "mode": "details"
+        },
+        "view": {
+          "allLayers": true,
+          "id": "fit",
+          "lat": 0,
+          "lon": 0,
+          "padding": 50,
+          "zoom": 15
+        }
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "bdki4has3hptse"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \r\n    a.entity_id, \r\n    a.dateobserved, \r\n    a.location_centroid, \r\n    latitude(a.location_centroid) AS longitude, \r\n    longitude(a.location_centroid) AS latitude, \r\n    a.\"level\"\r\nFROM \r\n    etwaterquality a\r\nINNER JOIN (\r\n    SELECT \r\n        entity_id, \r\n        MAX(dateobserved) AS MaxDate\r\n    FROM \r\n        etwaterquality\r\n    GROUP BY \r\n        entity_id\r\n) b ON a.entity_id = b.entity_id AND a.dateobserved = b.MaxDate limit 100;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "etwaterquality"
+        }
+      ],
+      "title": "Nivel geolocalizado",
+      "type": "geomap"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "bdki4has3hptse"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlPu"
           },
           "custom": {
             "axisBorderShow": false,
@@ -39,7 +194,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "fillOpacity": 80,
-            "gradientMode": "none",
+            "gradientMode": "hue",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -50,44 +205,39 @@
               "type": "linear"
             },
             "thresholdsStyle": {
-              "mode": "area"
+              "mode": "off"
             }
           },
           "mappings": [],
-          "max": 10,
+          "max": 100,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
+                "color": "green",
                 "value": null
               },
               {
-                "color": "#EAB839",
-                "value": 3
-              },
-              {
-                "color": "green",
-                "value": 5
+                "color": "red",
+                "value": 10
               }
             ]
-          },
-          "unit": "lengthm"
+          }
         },
         "overrides": []
       },
       "gridPos": {
         "h": 10,
-        "w": 17,
-        "x": 0,
+        "w": 12,
+        "x": 7,
         "y": 0
       },
-      "id": 3,
+      "id": 2,
       "options": {
-        "barRadius": 0.05,
-        "barWidth": 1,
-        "fullHighlight": true,
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
         "groupWidth": 0.7,
         "legend": {
           "calcs": [],
@@ -95,14 +245,14 @@
           "placement": "bottom",
           "showLegend": true
         },
-        "orientation": "vertical",
+        "orientation": "auto",
         "showValue": "auto",
         "stacking": "none",
-        "text": {},
         "tooltip": {
           "mode": "single",
           "sort": "none"
         },
+        "xField": "dateobserved",
         "xTickLabelRotation": -45,
         "xTickLabelSpacing": 100
       },
@@ -110,11 +260,12 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "fdkdeqviduiv4a"
+            "uid": "bdki4has3hptse"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "format": "table",
-          "rawSql": "SELECT dateobserved, level FROM etwaterquality LIMIT 50 ",
+          "rawQuery": true,
+          "rawSql": "SELECT dateobserved, turbidity FROM etwaterquality WHERE entity_id = '$buoyId' LIMIT 50 ",
           "refId": "A",
           "sql": {
             "columns": [
@@ -130,7 +281,7 @@
               {
                 "parameters": [
                   {
-                    "name": "level",
+                    "name": "turbidity",
                     "type": "functionParameter"
                   }
                 ],
@@ -150,13 +301,13 @@
           "table": "etwaterquality"
         }
       ],
-      "title": "Water level",
+      "title": "Turbidez",
       "type": "barchart"
     },
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "fdkdeqviduiv4a"
+        "uid": "bdki4has3hptse"
       },
       "fieldConfig": {
         "defaults": {
@@ -170,15 +321,11 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "red",
                 "value": null
               },
               {
-                "color": "red",
-                "value": 6
-              },
-              {
-                "color": "#EAB839",
+                "color": "orange",
                 "value": 6.5
               },
               {
@@ -186,7 +333,7 @@
                 "value": 7
               },
               {
-                "color": "yellow",
+                "color": "orange",
                 "value": 8
               },
               {
@@ -199,16 +346,16 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
-        "w": 7,
-        "x": 17,
+        "h": 6,
+        "w": 5,
+        "x": 19,
         "y": 0
       },
-      "id": 2,
+      "id": 4,
       "options": {
         "minVizHeight": 75,
         "minVizWidth": 75,
-        "orientation": "horizontal",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -225,15 +372,24 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "fdkdeqviduiv4a"
+            "uid": "bdki4has3hptse"
           },
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT ph FROM etwaterquality WHERE entity_id = '$buoyId' LIMIT 50 ",
+          "rawSql": "SELECT dateobserved, ph FROM etwaterquality WHERE entity_id = '$buoyId' LIMIT  50 ",
           "refId": "A",
           "sql": {
             "columns": [
+              {
+                "parameters": [
+                  {
+                    "name": "dateobserved",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
               {
                 "parameters": [
                   {
@@ -263,12 +419,116 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "fdkdeqviduiv4a"
+        "uid": "bdki4has3hptse"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.75
+              },
+              {
+                "color": "red",
+                "value": 0.9
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 19,
+        "y": 6
+      },
+      "id": 5,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "10.4.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "bdki4has3hptse"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT dateobserved, chlorine FROM etwaterquality WHERE entity_id = '$buoyId' LIMIT 50 ",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [
+                  {
+                    "name": "dateobserved",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              {
+                "parameters": [
+                  {
+                    "name": "chlorine",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "etwaterquality"
+        }
+      ],
+      "title": "Cloro",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "bdki4has3hptse"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-YlRd"
           },
           "custom": {
             "axisBorderShow": false,
@@ -279,14 +539,17 @@
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 0,
-            "gradientMode": "none",
+            "gradientMode": "hue",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -303,6 +566,8 @@
             }
           },
           "mappings": [],
+          "max": 35,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -315,14 +580,15 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "celsius"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
-        "w": 17,
-        "x": 0,
+        "h": 8,
+        "w": 12,
+        "x": 7,
         "y": 10
       },
       "id": 1,
@@ -342,7 +608,7 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "fdkdeqviduiv4a"
+            "uid": "bdki4has3hptse"
           },
           "editorMode": "code",
           "format": "table",
@@ -383,22 +649,21 @@
           "table": "etwaterquality"
         }
       ],
-      "title": "Temperature",
+      "title": "Temperatura",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "fdkdeqviduiv4a"
+        "uid": "bdki4has3hptse"
       },
-      "description": "Nivel de cloro en el agua",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
           "mappings": [],
-          "max": 1,
+          "max": 1499,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -408,8 +673,12 @@
                 "value": null
               },
               {
+                "color": "orange",
+                "value": 1000
+              },
+              {
                 "color": "red",
-                "value": 0.8
+                "value": 1200
               }
             ]
           }
@@ -417,12 +686,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
-        "w": 7,
-        "x": 17,
-        "y": 10
+        "h": 6,
+        "w": 5,
+        "x": 19,
+        "y": 12
       },
-      "id": 4,
+      "id": 6,
       "options": {
         "minVizHeight": 75,
         "minVizWidth": 75,
@@ -443,18 +712,28 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "fdkdeqviduiv4a"
+            "uid": "bdki4has3hptse"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "format": "table",
-          "rawSql": "SELECT chlorine FROM etwaterquality LIMIT 50 ",
+          "rawQuery": true,
+          "rawSql": "SELECT dateobserved, conductivity FROM etwaterquality WHERE entity_id = '$buoyId' LIMIT 50 ",
           "refId": "A",
           "sql": {
             "columns": [
               {
                 "parameters": [
                   {
-                    "name": "chlorine",
+                    "name": "dateobserved",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              {
+                "parameters": [
+                  {
+                    "name": "conductivity",
                     "type": "functionParameter"
                   }
                 ],
@@ -474,7 +753,7 @@
           "table": "etwaterquality"
         }
       ],
-      "title": "Cloro",
+      "title": "Conductividad",
       "type": "gauge"
     }
   ],
@@ -491,17 +770,17 @@
         },
         "datasource": {
           "type": "grafana-postgresql-datasource",
-          "uid": "fdkdeqviduiv4a"
+          "uid": "bdki4has3hptse"
         },
-        "definition": "SELECT DISTINCT entity_id FROM etwaterquality;",
+        "definition": "SELECT DISTINCT entity_id FROM etwaterquality;\n",
         "description": "Identifier of the buoy",
         "hide": 0,
         "includeAll": false,
-        "label": "Buoy",
+        "label": "Sensor",
         "multi": false,
         "name": "buoyId",
         "options": [],
-        "query": "SELECT DISTINCT entity_id FROM etwaterquality;",
+        "query": "SELECT DISTINCT entity_id FROM etwaterquality;\n",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -511,13 +790,13 @@
     ]
   },
   "time": {
-    "from": "now-6h",
-    "to": "now"
+    "from": "2024-04-05T18:00:00.000Z",
+    "to": "2024-04-21T13:00:00.000Z"
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "CrateDB Monitoring",
-  "uid": "cdkdflngqhog0c",
-  "version": 8,
+  "title": "Dashboard_v2",
+  "uid": "cdki57ix5cutcb",
+  "version": 14,
   "weekStart": ""
 }

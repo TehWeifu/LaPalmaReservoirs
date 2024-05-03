@@ -1,10 +1,14 @@
 ### Send PATCH to fetch all entities
-PATCH {{orion}}/v2/entities/JulianSanchez_01/attrs
+PATCH {{orion}}/v2/entities/JulianSanchez_02/attrs
 Content-Type: application/json
 
 {
-  "temperature": {
+  "dateObserved": {
+    "type": "DateTime",
+    "value": "2024-05-03T15:00:00.000Z"
+  },
+  "level": {
     "type": "Number",
-    "value": 16.1
+    "value": 1.11
   }
 }

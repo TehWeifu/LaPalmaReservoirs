@@ -1,6 +1,12 @@
 # Scripts
 
-- Setup: initializes two entities in Orion Context Broker and a subscription to QuantumLeap
+- utils
+    - Setup: initializes two entities in Orion Context Broker and a subscription to QuantumLeap
+- etl
+    - aggregation: fetch data from Crate and transforms it into a format for PowerBI
+    - buoys: fetch the different buoys from the database and load them into a .csv file
+- emulator
+    - BuoyEmulator: simulates the behavior of a buoy (according to parameters in config file)
 
 # Environment Variables
 

@@ -24,7 +24,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "bdki4has3hptse"
+        "uid": "fdklpvpo80kjka"
       },
       "fieldConfig": {
         "defaults": {
@@ -147,7 +147,7 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "bdki4has3hptse"
+            "uid": "fdklpvpo80kjka"
           },
           "editorMode": "code",
           "format": "table",
@@ -180,7 +180,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "bdki4has3hptse"
+        "uid": "fdklpvpo80kjka"
       },
       "fieldConfig": {
         "defaults": {
@@ -260,7 +260,7 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "bdki4has3hptse"
+            "uid": "fdklpvpo80kjka"
           },
           "editorMode": "code",
           "format": "table",
@@ -307,7 +307,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "bdki4has3hptse"
+        "uid": "fdklpvpo80kjka"
       },
       "fieldConfig": {
         "defaults": {
@@ -372,7 +372,7 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "bdki4has3hptse"
+            "uid": "fdklpvpo80kjka"
           },
           "editorMode": "code",
           "format": "table",
@@ -419,7 +419,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "bdki4has3hptse"
+        "uid": "fdklpvpo80kjka"
       },
       "fieldConfig": {
         "defaults": {
@@ -476,7 +476,7 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "bdki4has3hptse"
+            "uid": "fdklpvpo80kjka"
           },
           "editorMode": "code",
           "format": "table",
@@ -523,7 +523,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "bdki4has3hptse"
+        "uid": "fdklpvpo80kjka"
       },
       "fieldConfig": {
         "defaults": {
@@ -608,7 +608,7 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "bdki4has3hptse"
+            "uid": "fdklpvpo80kjka"
           },
           "editorMode": "code",
           "format": "table",
@@ -655,7 +655,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "bdki4has3hptse"
+        "uid": "fdklpvpo80kjka"
       },
       "fieldConfig": {
         "defaults": {
@@ -712,7 +712,7 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "bdki4has3hptse"
+            "uid": "fdklpvpo80kjka"
           },
           "editorMode": "code",
           "format": "table",
@@ -770,7 +770,7 @@
         },
         "datasource": {
           "type": "grafana-postgresql-datasource",
-          "uid": "bdki4has3hptse"
+          "uid": "fdklpvpo80kjka"
         },
         "definition": "SELECT DISTINCT entity_id FROM etwaterquality;\n",
         "description": "Identifier of the buoy",

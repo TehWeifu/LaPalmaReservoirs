@@ -39,6 +39,8 @@ services:
       - "GF_SECURITY_ADMIN_PASSWORD=admin"  # Cambia según tus preferencias
     depends_on:
       - quantumleap
+    volumes:
+      - grafana:/data
 
   iotagent:
     image: fiware/iotagent-ul
@@ -54,3 +56,4 @@ services:
 volumes:
   mongodata:
   cratedata:
+  grafana:

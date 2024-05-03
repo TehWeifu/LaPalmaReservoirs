@@ -40,7 +40,7 @@ services:
     depends_on:
       - quantumleap
     volumes:
-      - grafana:/var/lib/grafanaó
+      - grafana:/var/lib/grafana
 
   iotagent:
     image: fiware/iotagent-ul

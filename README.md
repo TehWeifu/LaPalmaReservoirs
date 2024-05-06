@@ -16,10 +16,13 @@ This project uses the following environment variables (default values are provid
 - `HOST_QUANTUMLEAP`: IP address of the QuantumLeap server
 - `HOST_CRATE`: IP address of the CrateDB server
 
-# Useful Commands
+# Docker
 
 Initialize architecture: `docker-compose -f docker-compose_SDD.yml up -d`
 Stop architecture: `docker-compose -f docker-compose_SDD.yml down`
+
+Note: sometimes the Orion container does not start correctly and crashes as soon as it starts. In that case, delete the
+log file and restart the architecture.
 
 # Endpoints
 

@@ -1,5 +1,6 @@
 import os
 
+import mysql.connector
 import pandas as pd
 from crate import client
 from dotenv import load_dotenv
@@ -7,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-def fetch_data():
+def fetch_data() -> list:
     connection = client.connect(os.getenv("HOST_CRATE"), username="crate", password=None, timeout=10)
     cursor = connection.cursor()
 
@@ -25,6 +26,35 @@ def fetch_data():
     finally:
         cursor.close()
         connection.close()
+
+
+def load_to_csv(aggregated_data: pd.DataFrame):
+    # Save the DataFrame to a CSV file
+    aggregated_data.to_csv("./../../data/etwaterquality.csv", index=False)
+
+
+def load_to_database(aggregated_data: pd.DataFrame):
+    # Save the DataFrame to a MySQL database
+    conn = mysql.connector.connect(
+        host=os.getenv('DATA_WAREHOUSE_DB_HOST'),
+        user=os.getenv('DATA_WAREHOUSE_DB_USER'),
+        password=os.getenv('DATA_WAREHOUSE_DB_PASSWORD'),
+        database=os.getenv('DATA_WAREHOUSE_DB_DATABASE')
+    )
+
+    cursor = conn.cursor()
+
+    insert_query = ("INSERT INTO `buoy_hourly_aggregates` "
+                    "(entity, date_observed, property, avg_value, min_value, max_value) "
+                    "VALUES (%s, %s, %s, %s, %s, %s)")
+
+    data_to_insert = list(aggregated_data.itertuples(index=False, name=None))
+    cursor.executemany(insert_query, data_to_insert)
+
+    conn.commit()
+
+    cursor.close()
+    conn.close()
 
 
 # Fetch data from CrateDB
@@ -55,5 +85,5 @@ df_buoy = df_buoy.groupby(["entity", "date_observed", "property"]).agg(
     max_value=("value", "max")
 ).reset_index()
 
-# Save the DataFrame to a CSV file
-df_buoy.to_csv("./../../data/etwaterquality.csv", index=False)
+load_to_csv(df_buoy)
+load_to_database(df_buoy)

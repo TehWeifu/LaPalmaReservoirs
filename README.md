@@ -23,6 +23,8 @@ Stop architecture: `docker-compose -f docker-compose_SDD.yml down`
 
 Note: sometimes the Orion container does not start correctly and crashes as soon as it starts. In that case, delete the
 log file and restart the architecture.
+`cd /var/lib/docker/containers/<container_id>/`
+`sudo rm <container_id>-json.log`
 
 # Endpoints
 
@@ -47,3 +49,27 @@ Steps to add CrateDB as Grafana data source:
 * Password: *empty*
 * TLS/SSL Mode: disable
 * PostgreSQL Version: 9.3
+
+# SQLs
+
+CREATE DATABASE LaPalmaReservoirs;
+USE LaPalmaReservoirs;
+
+CREATE TABLE `buoy_hourly_aggregates`
+(
+`entity`        VARCHAR(50),
+`date_observed` DATE,
+`property`      VARCHAR(50),
+`avg_value`     FLOAT,
+`min_value`     FLOAT,
+`max_value`     FLOAT,
+PRIMARY KEY (`entity`, `date_observed`, `property`)
+)
+
+CREATE TABLE `buoys`
+(
+`entity`    VARCHAR(50),
+`latitude`  FLOAT,
+`longitude` FLOAT,
+PRIMARY KEY (`entity`)
+)

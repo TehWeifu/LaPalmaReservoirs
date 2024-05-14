@@ -4,6 +4,7 @@ import json
 import os
 from datetime import datetime
 
+import mysql.connector
 import requests
 from dotenv import load_dotenv
 
@@ -99,6 +100,38 @@ def create_quantum_leap_subscription_payload() -> dict:
     }
 
 
+def create_data_warehouse_database():
+    conn = mysql.connector.connect(
+        host=os.getenv('DATA_WAREHOUSE_DB_HOST'),
+        user=os.getenv('DATA_WAREHOUSE_DB_USER'),
+        password=os.getenv('DATA_WAREHOUSE_DB_PASSWORD'),
+        database=os.getenv('DATA_WAREHOUSE_DB_DATABASE')
+    )
+
+    cursor = conn.cursor()
+
+    query_create_buoys = ("CREATE TABLE `buoys` ("
+                          "`entity`    VARCHAR(50),"
+                          "`latitude`  FLOAT,"
+                          "`longitude` FLOAT,"
+                          "PRIMARY KEY (`entity`)"
+                          ")")
+    cursor.execute(query_create_buoys)
+
+    query_create_aggregated = ("CREATE TABLE `buoy_hourly_aggregates` ("
+                               "`entity` VARCHAR(255),"
+                               "`date_observed` DATETIME,"
+                               "`property` VARCHAR(255),"
+                               "`avg_value` FLOAT,"
+                               "`min_value` FLOAT,"
+                               "`max_value` FLOAT"
+                               ")")
+    cursor.execute(query_create_aggregated)
+
+    cursor.close()
+    conn.close()
+
+
 # Server URL
 url_entity = f"{os.getenv("HOST_ORION")}/v2/entities"
 url_subscription = f"{os.getenv("HOST_ORION")}/v2/subscriptions"
@@ -124,3 +157,6 @@ second_entity_response = requests.post(url_entity, headers=headers, data=second_
 quantum_leap_subscription_payload = json.dumps(create_quantum_leap_subscription_payload())
 quantum_leap_subscription_response = requests.post(url_subscription, headers=headers,
                                                    data=quantum_leap_subscription_payload)
+
+# Create Data Warehouse database
+create_data_warehouse_database()

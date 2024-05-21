@@ -1,12 +1,12 @@
 # Scripts
 
-- utils
-    - Setup: initializes two entities in Orion Context Broker and a subscription to QuantumLeap
+- emulator
+    - BuoyEmulator: simulates the behavior of a buoy (according to parameters in config file)
 - etl
     - aggregation: fetch data from Crate and transforms it into a format for PowerBI
     - buoys: fetch the different buoys from the database and load them into a .csv file
-- emulator
-    - BuoyEmulator: simulates the behavior of a buoy (according to parameters in config file)
+- utils
+    - Setup: initializes two entities in Orion Context Broker and a subscription to QuantumLeap
 
 # Environment Variables
 
@@ -15,6 +15,11 @@ This project uses the following environment variables (default values are provid
 - `HOST_ORION`: IP address of the Orion Context Broker
 - `HOST_QUANTUMLEAP`: IP address of the QuantumLeap server
 - `HOST_CRATE`: IP address of the CrateDB server
+
+- `DATA_WAREHOUSE_DB_HOST`: IP address of the MySql server for the data warehouse
+- `DATA_WAREHOUSE_DB_USER`: username for the MySql server
+- `DATA_WAREHOUSE_DB_PASSWORD`: password for the MySql server
+- `DATA_WAREHOUSE_DB_DATABASE`: name of the database in the MySql server
 
 # Docker
 

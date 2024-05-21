@@ -1,0 +1,14 @@
+apiVersion: 1
+contactPoints:
+    - orgId: 1
+      name: TelegramBot
+      receivers:
+        - uid: ddklu7fohhgqpe
+          type: telegram
+          settings:
+            bottoken: 7089431694:AAGajZG9hzF2IxyoqOfA8b7MXaa8yRQX0mA
+            chatid: "-1002027505270"
+            disable_notification: false
+            disable_web_page_preview: false
+            protect_content: false
+          disableResolveMessage: false

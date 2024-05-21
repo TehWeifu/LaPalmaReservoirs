@@ -1,0 +1,117 @@
+apiVersion: 1
+groups:
+    - orgId: 1
+      name: AlertasSensorGrupo
+      folder: AltertasSensor
+      interval: 5m
+      rules:
+        - uid: cdkltgko7318ga
+          title: Alerta nivel agua bajo
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: edklreyu76i2od
+              model:
+                editorMode: builder
+                format: time_series
+                intervalMs: 1000
+                maxDataPoints: 43200
+                rawSql: 'SELECT dateobserved AS "time", level AS "value", entity_id FROM etwaterquality ORDER BY dateobserved ASC LIMIT 50 '
+                refId: A
+                sql:
+                    columns:
+                        - alias: '"time"'
+                          parameters:
+                            - name: dateobserved
+                              type: functionParameter
+                          type: function
+                        - alias: '"value"'
+                          parameters:
+                            - name: level
+                              type: functionParameter
+                          type: function
+                        - parameters:
+                            - name: entity_id
+                              type: functionParameter
+                          type: function
+                    groupBy:
+                        - property:
+                            type: string
+                          type: groupBy
+                    limit: 50
+                    orderBy:
+                        property:
+                            name:
+                                - dateobserved
+                            type: string
+                        type: property
+                    orderByDirection: ASC
+                table: etwaterquality
+            - refId: B
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+            - refId: C
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 4
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          noDataState: NoData
+          execErrState: Error
+          for: 0s
+          annotations:
+            description: 'Alarma provocada: El nivel del agua es demasiado bajo para el embalse {{ $values.B.Value }}. Nivel actual: {{ $values.level }}'
+            summary: 'Alarma provocada: El nivel del agua es demasiado bajo para el embalse {{ $values.B.Value }}. Nivel actual: {{ $values.level }}'
+          labels:
+            entity_id: water-sensor
+          isPaused: false

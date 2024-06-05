@@ -1,14 +1,17 @@
 ### Send PATCH to fetch all entities
-PATCH {{orion}}/v2/entities/JulianSanchez_02/attrs
+PATCH {{orion}}/v2/entities/Vicario/attrs
 Content-Type: application/json
 
 {
   "dateObserved": {
     "type": "DateTime",
-    "value": "2024-05-03T15:00:00.000Z"
+    "value": "2014-05-03T14:00:00.000Z"
   },
-  "level": {
-    "type": "Number",
-    "value": 1.11
+  "location": {
+    "value": {
+      "type": "Point",
+      "coordinates": [28.81, -17.801]
+    },
+    "type": "geo:json"
   }
 }

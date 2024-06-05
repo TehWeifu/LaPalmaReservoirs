@@ -41,8 +41,11 @@ log file and restart the architecture.
 - Remote (server):
     - Orion: `http://orion.lapalma.fpmislata.es`
     - QuantumLeap: `http://orion.lapalma.fpmislata.es:8668`
-    - Grafana: `http://orion.lapalma.fpmislata.es:3000`
-    - Crate: `http://orion.lapalma.fpmislata.es:4200/#!/`
+    - Grafana: `http://dashboard.lapalma.fpmislata.es`
+    - Crate: `http://crate.lapalma.fpmislata.es`
+        - Database: mtopeniot
+        - User: crate
+        - Password: (None)
 
 # Grafana
 

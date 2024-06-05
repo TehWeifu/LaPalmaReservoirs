@@ -1,6 +1,6 @@
 from datetime import datetime
 
-ENTITIES_IDS = ["JulianSanchez_01", "JulianSanchez_02"]
+ENTITIES_IDS = ["Vicario", "Barlovento"]
 
 ENTITY_PROPERTIES = {
     "temperature": {
@@ -19,7 +19,7 @@ ENTITY_PROPERTIES = {
         "type": "Number",
         "value_range": [50, 1_500]
     },
-    "level": {
+    "water_lvl": {
         "type": "Number",
         "value_range": [0, 10]
     },
@@ -30,8 +30,8 @@ ENTITY_PROPERTIES = {
 }
 
 # start and end datetimes to generate messages
-DATE_START = datetime(2024, 4, 1)
-DATE_END = datetime(2024, 5, 31)
+DATE_START = datetime(2024, 5, 1)
+DATE_END = datetime(2024, 7, 1)
 
 # Periodicity of messages (in seconds)
 MESSAGE_PERIOD = 3_600

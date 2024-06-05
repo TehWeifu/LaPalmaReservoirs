@@ -13,7 +13,7 @@ headers = {
 payload = {
     "id": "AirQualityUnit01",
     "type": "AirQualityObserved",
-    "dateObserved": {
+    "dateobserved": {
         "type": "DateTime",
         "value": "2018-07-30T18:00:00-05:00"
     },

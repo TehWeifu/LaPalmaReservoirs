@@ -16,7 +16,7 @@ def create_default_entity_payload(name: str, latitude: float, longitude: float) 
     return {
         "id": name,
         "type": "WaterQuality",
-        "dateObserved": {
+        "dateobserved": {
             "type": "DateTime",
             "value": datetime.now().isoformat()
         },
@@ -66,7 +66,7 @@ def create_quantum_leap_subscription_payload() -> dict:
             ],
             "condition": {
                 "attrs": [
-                    "dateObserved",
+                    "dateobserved",
                     "temperature",
                     "ph",
                     "turbidity",
@@ -81,7 +81,7 @@ def create_quantum_leap_subscription_payload() -> dict:
                 "id",
                 "type",
                 "location",
-                "dateObserved",
+                "dateobserved",
                 "temperature",
                 "ph",
                 "turbidity",

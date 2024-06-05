@@ -3,36 +3,37 @@ POST {{orion}}/v2/subscriptions
 Content-Type: application/json
 
 {
-  "description": "Suscripcion QuantumLeap a calidad del agua",
+  "description": "Subscripción QuantumLeap a calidad del agua",
   "subject": {
     "entities": [
       {
         "idPattern": ".*",
-        "type": "WaterQuality"
+        "type": "CalidadAgua"
       }
     ],
     "condition": {
       "attrs": [
         "chlorine",
         "conductivity",
-        "level",
+        "water_lvl",
         "ph",
         "turbidity",
-        "temperature"
+        "temperature",
+        "dateobserved"
       ]
     }
   },
   "notification": {
     "attrs": [
-      "id",
       "type",
       "chlorine",
       "conductivity",
-      "level",
+      "water_lvl",
       "ph",
       "turbidity",
       "temperature",
-      "location"
+      "location",
+      "dateobserved"
     ],
     "http": {
       "url": "{{quantumleap}}/v2/notify"

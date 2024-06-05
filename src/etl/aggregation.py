@@ -14,7 +14,7 @@ def fetch_data() -> list:
 
     query = ("SELECT "
              "entity_id, dateobserved, temperature, ph, turbidity, conductivity, level, chlorine "
-             "FROM etwaterquality")
+             "FROM etcalidadagua")
 
     try:
         cursor.execute(query)

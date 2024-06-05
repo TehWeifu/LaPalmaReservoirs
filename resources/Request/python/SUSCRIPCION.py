@@ -21,13 +21,13 @@ payload = {
         ],
         "condition": {
             "attrs": [
-                "CO", "O3", "PM10", "SO2", "NO2", "temperature", "relativeHumidity", "dateObserved"
+                "CO", "O3", "PM10", "SO2", "NO2", "temperature", "relativeHumidity", "dateobserved"
             ]
         }
     },
     "notification": {
         "attrs": [
-            "id", "CO", "O3", "PM10", "SO2", "NO2", "temperature", "relativeHumidity", "dateObserved", "address", "location"
+            "id", "CO", "O3", "PM10", "SO2", "NO2", "temperature", "relativeHumidity", "dateobserved", "address", "location"
         ],
         "http": {
             "url": "http://quantumleap:8668/v2/notify"
